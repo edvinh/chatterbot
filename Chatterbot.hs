@@ -65,7 +65,7 @@ present :: Phrase -> String
 present = unwords
 
 prepare :: String -> Phrase
-prepare = reduce . words . map toLower . filter (not . flip elem ".,:;*!#%&|") 
+prepare = reduce . words . map toLower . filter (not . flip elem ".,:;*!#%&|")
 
 rulesCompile :: [(String, [String])] -> BotBrain
 rulesCompile = (map . map2) (words . map toLower, map words)
@@ -93,7 +93,7 @@ reduce :: Phrase -> Phrase
 reduce = reductionsApply reductions
 
 reductionsApply :: [PhrasePair] -> Phrase -> Phrase
-reductionsApply reductions = try (transformationsApply "*" (reductionsApply reductions) reductions)
+reductionsApply = fix . try . transformationsApply "*" id 
 
 
 --------------------------------------------------------
@@ -102,7 +102,6 @@ reductionsApply reductions = try (transformationsApply "*" (reductionsApply redu
 
 -- Replaces a wildcard in a list with the list given as the third argument
 substitute :: Eq a => a -> [a] -> [a] -> [a]
-substitute _ ts [] = []
 substitute _ [] _  = []
 substitute wc (t:ts) ss
   | wc == t   = ss ++ substitute wc ts ss

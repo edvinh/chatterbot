@@ -47,7 +47,8 @@ eliza = [
   ("What is Haskell",
       ["Oh, I thought you knew that. It is a functional " ++
        "programming language featuring strong typing and " ++
-       "lazy evaluation."]),
+       "lazy evaluation."
+       ]),
 
   ("What *",
       ["Why do you ask?",
